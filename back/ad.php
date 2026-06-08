@@ -1,11 +1,4 @@
-<?php
-include_once "./api/db.php";
-// 建立 title 資料表的 DB 物件
-$Title = new DB('title');
-
-?>
-
-<div class="di"
+<div
     style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
     <table width="100%">
@@ -33,55 +26,42 @@ $Title = new DB('title');
                 margin:auto;
                 overflow:auto;
                 border:#666 1px solid;">
-        <p class="t cent botli">網站標題管理</p>
-        <form method="post" target="back" action="../api/">
+        <p class="t cent botli">動態問字廣告</p>
+        <form method="post" action="?do=tii">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
-                        <td width="45%">網站標題</td>
-                        <td width="23%">替代文字</td>
+                        <td width="45%">動態文字廣告</td>
                         <td width="7%">顯示</td>
                         <td width="7%">刪除</td>
                         <td></td>
                     </tr>
                     <?php 
-                
-                $titles=$Title->all();
-                foreach($titles as $title):
-                ?>
-
-                    <tr>
-                    <td width="45%">
-                            <img src="./upload/<?= $title['img']; ?>" style="width:300px;height:30px">
+                    $rows =${ucfirst($do)}->all();
+                    foreach($rows as $row) {
+                    ?>
+                    <tr class="cent">
+                        <td width="80%">
+                            <input type="text" name="text[]" value="<?= $row['text']; ?>" style="width98%">
                         </td>
-                        <td width="23%">
-                            <input type="text" name="text[]" value="<?= $title['text']; ?>">
+                        <td width="10%">
+                            <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>"
+                                <?= ($row['sh']==1)?'checked':''; ?>>
                         </td>
-                        <td width="7%">
-                            <input type="radio" name="sh" value="<?= $title['id']; ?>"  <?= ($title['sh']==1)?'checked':''; ?> >
+                        <td width="10%">
+                            <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
                         </td>
-                        <td width="7%">
-                            <input type="checkbox" name="del[]" value="<?= $title['id']; ?>">
-                        </td>
-                        <td>
-
-                            <input type="button" value="更新圖片"  onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?= $title['id'];?>')">
-                        </td>
-                        <input type="hidden" name="id[]" value="<?= $title['id']; ?>">
+                        <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
                     </tr>
-                    <?php 
-                    // 💡 在表格列結束後，用 endforeach 關閉迴圈
-                        endforeach; 
-                        ?>
+                    <?php
+                    }
+                    ?>
                 </tbody>
-
             </table>
             <table style="margin-top:40px; width:70%;">
                 <tbody>
                     <tr>
-                        <td width="200px">
-                            <input type="button"
-                                onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?=  $title['id'] ?>')"
+                        <td width="200px"><input type="button" onclick="op('#cover','#cvr','include/<?=$do; ?>.php')"
                                 value="新增網站標題圖片">
                         </td>
                         <td class="cent">
