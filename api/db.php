@@ -16,17 +16,18 @@ class DB{
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 $tmp=$this->a2s($arg[0]);
-                $sql .=" WHERE " .join("AND",$tmp);
+                // 修正：加強空格 " AND "
+                $sql .=" WHERE " .join(" AND ",$tmp);
             }else{
-            $sql .= $arg[0];
+                $sql .= $arg[0];
             }
-    }
+        }
 
-    if(isset($arg[1])){
-        $sql .= $arg[1];
-    }
+        if(isset($arg[1])){
+            $sql .= $arg[1];
+        }
 
-    return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
     }
 
 
@@ -35,17 +36,18 @@ class DB{
         if(isset($arg[0])){
             if(is_array($arg[0])){
                 $tmp=$this->a2s($arg[0]);
-                $sql .=" WHERE " .join("AND",$tmp);
+                // 修正：加強空格 " AND "
+                $sql .=" WHERE " .join(" AND ",$tmp);
             }else{
-            $sql .= $arg[0];
+                $sql .= $arg[0];
             }
-    }
+        }
 
-    if(isset($arg[1])){
-        $sql .= $arg[1];
-    }
+        if(isset($arg[1])){
+            $sql .= $arg[1];
+        }
 
-    return $this->pdo->query($sql)->fetchColumn();
+        return $this->pdo->query($sql)->fetchColumn();
     }
 
 
@@ -54,12 +56,13 @@ class DB{
 
         if(is_array($arg)){
                 $tmp=$this->a2s($arg);
-                $sql .=" WHERE " .join("AND",$tmp);
+                // 修正：加強空格 " AND "
+                $sql .=" WHERE " .join(" AND ",$tmp);
         }else{
             $sql .=" WHERE `id`= '$arg'";
         }
 
-    return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
+        return $this->pdo->query($sql)->fetch(PDO::FETCH_ASSOC);
     }
 
     function save($arg){
@@ -70,8 +73,8 @@ class DB{
             $sql .=" WHERE `id`= '{$arg['id']}'";
 
         }else{
-            $key=array_keys($arg);
-            $sql =" INSERT INTO $this->table (`".join(" , ",$key)."`) VALUES('".join("','",$arg)."')";
+            $keys=array_keys($arg);
+            $sql="INSERT INTO $this->table (`".join("`,`",$keys)."`) VALUES('".join("','",$arg)."');";
             
         }
         return $this->pdo->exec($sql);
@@ -79,15 +82,16 @@ class DB{
 
 
     function del($arg){
-    $sql="DELETE FROM $this->table ";
-    if(is_array($arg)){
-        $tmp=$this->a2s($arg);
-        $sql .=" WHERE " .join("AND",$tmp);
-    }
-    else{
-        $sql .=" WHERE `id`= '$arg'";
-    }
-    return $this->pdo->exec($sql);
+        $sql="DELETE FROM $this->table ";
+        if(is_array($arg)){
+            $tmp=$this->a2s($arg);
+            // 修正：加強空格 " AND "
+            $sql .=" WHERE " .join(" AND ",$tmp);
+        }
+        else{
+            $sql .=" WHERE `id`= '$arg'";
+        }
+        return $this->pdo->exec($sql);
     }
 
     protected function a2s($arry){
@@ -96,14 +100,13 @@ class DB{
             $tmp[]="`$key`='$val'";
         }
         return $tmp;
-     }  
+    }  
 
 
 
-function q($sql){
-    return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
-
-}
+    function q($sql){
+        return $this->pdo->query($sql)->fetchAll(PDO::FETCH_ASSOC);
+    }
 
 }
 
@@ -112,6 +115,7 @@ function dd($array){
     print_r($array);
     echo"</pre>";
 }
+
 function to($url){
     header("location:$url");
 }
@@ -120,9 +124,9 @@ $Title=new DB('title');
 $Ad=new DB('ad');
 $Mvim=new DB('mvim');
 $Image=new DB('image');
-$news=new DB('news');
+$News=new DB('news');
 $Admin=new DB('admin');
 $Menu=new DB('menu');
 $Total=new DB('total');
-$Botton=new DB('botton');
+$Bottom=new DB('bottom');
 ?>
