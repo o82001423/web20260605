@@ -1,15 +1,12 @@
-<h3 class="cent">新增網站標題圖片</h3>
+<h3 class="cent">進站總人數管理</h3>
 <hr>
 <form action="api/edit_total.php?table=total" method="post" enctype="multipart/form-data">
     <table class="all" style="width:70%; margin:auto;">
         <tr>
-            <td class="tt">網站標題圖片：</td>
-            <td><input type="file" name="img"></td>
-        </tr>
-        <tr>
-            <td class="tt">替代文字：</td>
+            <td class="tt" style="background-color: yellow;">動態文字廣告：動態文字廣告：</td>
             <td><input type="text" name="text"></td>
         </tr>
+        
     </table>
     <div class="cent">
     <input type="submit" value="新增">

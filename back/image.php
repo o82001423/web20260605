@@ -38,10 +38,10 @@
                         <td></td>
                     </tr>
                     <?php 
-    $db=${ucfirst($do)};
-    $rows=$db->all();
-    foreach($rows as $row):
-    ?>
+                    $db=${ucfirst($do)};
+                    $rows=$db->all();
+                    foreach($rows as $row):
+                    ?>
                     <tr>
                         <td>
                             <img src="./upload/<?= $row['img']; ?>" style="width:250px;height:103px">

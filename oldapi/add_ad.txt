@@ -1,0 +1,8 @@
+<?php 
+include_once "db.php";
+// 建立 title 資料表的 DB 物件
+
+    $_POST['sh']=1;
+    $Ad->save($_POST);
+   
+to("../admin.php?do=title");

@@ -20,13 +20,13 @@
         </tbody>
     </table>
     <div style="width:99%;height:87%;margin:auto;overflow:auto;border:#666 1px solid;">
-    <p class="t cent botli">動畫圖片管理</p>
+    <p class="t cent botli">管理者帳號管理</p>
     <form method="post" target="back" action="./api/edit.php?table=<?= $do ?>">
     <table width="100%">
         <tbody>
             <tr class="yel">
-                <td width="70%">動畫圖片管理</td>
-                <td width="10%">顯示</td>
+                <td width="45%">帳號</td>
+                <td width="45%">密碼</td>
                 <td width="10%">刪除</td>
                 <td></td>
             </tr>
@@ -38,29 +38,25 @@
     ?>
 
     <tr>
-        <td>
-            <img src="./upload/<?= $row['img']; ?>" style="width:250px;height:120px">
-            </td>
-                <td>
-                   <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh']==1)?'checked':''; ?>>
-                </td>
-                <td>
-                   <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
-                </td>
-
-                <td>
-                <input type="button" value="更換動畫" onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?= $row['id'];?>')">
-                </td>
-                    <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
-            </tr>
-            <?php endforeach; // 2. 這裡補上結尾，Bug 就解決了！ ?>
-        </tbody>
+        <td width="45%">
+        <input type="text" name="acc[]" value="<?= $row['acc']; ?>" style="width:95%">
+        </td>
+        <td width="45%">
+            <input type="password" name="pw[]" value="<?= $row['pw']; ?>">
+        </td>
+        <td width="45%">
+            <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+        </td>
+        <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
+    </tr>
+    <?php endforeach; // 2. 這裡補上結尾，Bug 就解決了！ ?>
+    </tbody>
     </table>
     <table style="margin-top:40px; width:70%;">
     <tbody>
         <tr>
-        <td width="200px"><input type="button" onclick="op('#cover','#cvr','include/<?=$do; ?>.php')"
-                                value="新增動畫圖片">
+        <td width="200px">
+            <input type="button" onclick="op('#cover','#cvr','include/<?=$do; ?>.php')" value="新增管理者帳號">
         </td>
         <td class="cent">
             <input type="submit" value="修改確定">

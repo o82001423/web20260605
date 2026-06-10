@@ -1,5 +1,6 @@
 <?php 
 include_once "db.php";
+
 $table=$_GET['table'];
 $db=${ucfirst($table)};
 
@@ -11,6 +12,12 @@ if(!empty($_FILES['img']['tmp_name'])){
         case 'title':
             $_POST['sh']=0;
         break;
+        case 'admin':
+            unset($_POST['pw2']);
+        break;
+        case "menu":
+            $_POST['main_id']=0;
+            $_POST['sh']=1;
         default:
             $_POST['sh']=1;
     }

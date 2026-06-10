@@ -120,6 +120,7 @@ function to($url){
     header("location:$url");
 }
 
+
 $Title=new DB('title');
 $Ad=new DB('ad');
 $Mvim=new DB('mvim');
