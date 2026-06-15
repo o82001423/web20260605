@@ -21,7 +21,7 @@
     </table>
     <div style="width:99%;height:87%;margin:auto;overflow:auto;border:#666 1px solid;">
     <p class="t cent botli">管理者帳號管理</p>
-    <form method="post" target="back" action="./api/edit.php?table=<?= $do ?>">
+    <form method="post"  action="./api/edit.php?table=<?= $do ?>">
     <table width="100%">
         <tbody>
             <tr class="yel">
@@ -44,7 +44,7 @@
         <td width="45%">
             <input type="password" name="pw[]" value="<?= $row['pw']; ?>">
         </td>
-        <td width="45%">
+        <td width="10%">
             <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
         </td>
         <input type="hidden" name="id[]" value="<?= $row['id']; ?>">

@@ -11,8 +11,7 @@
                     </a>
                 </td>
                 <td>
-                    <button onclick="document.cookie='user='; location.replace('index.php')"
-                        style="width:99%; margin-right:2px; height:50px;">
+                    <button onclick="location.replace('index.php')" style="width:99%; margin-right:2px; height:50px;">
                         管理登出
                     </button>
                 </td>
@@ -20,55 +19,57 @@
         </tbody>
     </table>
     <div style="width:99%;height:87%;margin:auto;overflow:auto;border:#666 1px solid;">
-    <p class="t cent botli">動畫圖片管理</p>
-    <form method="post" target="back" action="./api/edit.php?table=<?= $do ?>">
-    <table width="100%">
-        <tbody>
-            <tr class="yel">
-                <td width="70%">動畫圖片管理</td>
-                <td width="10%">顯示</td>
-                <td width="10%">刪除</td>
-                <td></td>
-            </tr>
+        <p class="t cent botli">動畫圖片管理</p>
+        <form method="post" action="./api/edit.php?table=<?= $do ?>">
+            <table width="100%">
+                <tbody>
+                    <tr class="yel">
+                        <td width="70%">動畫圖片管理</td>
+                        <td width="10%">顯示</td>
+                        <td width="10%">刪除</td>
+                        <td></td>
+                    </tr>
 
-    <?php 
+                    <?php 
     $db=${ucfirst($do)};
     $rows=$db->all();
     foreach($rows as $row):
     ?>
 
-    <tr>
-        <td>
-            <img src="./upload/<?= $row['img']; ?>" style="width:250px;height:120px">
-            </td>
-                <td>
-                   <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>" <?= ($row['sh']==1)?'checked':''; ?>>
-                </td>
-                <td>
-                   <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
-                </td>
+                    <tr>
+                        <td>
+                            <img src="./upload/<?= $row['img']; ?>" style="width:250px;height:120px">
+                        </td>
+                        <td>
+                            <input type="checkbox" name="sh[]" value="<?= $row['id']; ?>"
+                                <?= ($row['sh']==1)?'checked':''; ?>>
+                        </td>
+                        <td>
+                            <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
+                        </td>
 
-                <td>
-                <input type="button" value="更換動畫" onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?= $row['id'];?>')">
-                </td>
-                    <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
-            </tr>
-            <?php endforeach; // 2. 這裡補上結尾，Bug 就解決了！ ?>
-        </tbody>
-    </table>
-    <table style="margin-top:40px; width:70%;">
-    <tbody>
-        <tr>
-        <td width="200px"><input type="button" onclick="op('#cover','#cvr','include/<?=$do; ?>.php')"
+                        <td>
+                            <input type="button" value="更換動畫"
+                                onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?= $row['id'];?>')">
+                        </td>
+                        <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
+                    </tr>
+                    <?php endforeach; // 2. 這裡補上結尾，Bug 就解決了！ ?>
+                </tbody>
+            </table>
+            <table style="margin-top:40px; width:70%;">
+                <tbody>
+                    <tr>
+                        <td width="200px"><input type="button" onclick="op('#cover','#cvr','include/<?=$do; ?>.php')"
                                 value="新增動畫圖片">
-        </td>
-        <td class="cent">
-            <input type="submit" value="修改確定">
-            <input type="reset" value="重置">
-        </td>
-        </tr>
-        </tbody>
-        </table>
+                        </td>
+                        <td class="cent">
+                            <input type="submit" value="修改確定">
+                            <input type="reset" value="重置">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
         </form>
     </div>

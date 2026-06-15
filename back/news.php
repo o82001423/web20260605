@@ -1,6 +1,7 @@
 <div class="di"
     style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
     <!--正中央-->
+   
     <table width="100%">
         <tbody>
             <tr>
@@ -38,6 +39,7 @@
                    $rows=$db->all(" limit $start,$div");
                    foreach($rows as $row):
                 ?>
+                
                 <tr>
                     <td width="80%">
                         <textarea name="text[]" id="" style="width: 95%;height:60px;"><?=$row['text']; ?></textarea>

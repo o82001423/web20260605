@@ -9,7 +9,7 @@
                     <a href="?do=admin" style="color:#000; text-decoration:none;">後台管理區</a>
                 </td>
                 <td>
-                    <button onclick="document.cookie.user.location.replace(index.php)"
+                    <button onclick="document.cookie='user='; location.replace('index.php')"
                         style="width:99%; margin-right:2px; height:50px;">管理登出</button>
                 </td>
             </tr>
