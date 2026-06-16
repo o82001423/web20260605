@@ -1,6 +1,6 @@
 <h3 class="cent">新增網站標題圖片</h3>
 <hr>
-<form action="api/edit_total.php?table=total" method="post" enctype="multipart/form-data">
+<form action="api/add.php?table=title" method="post" enctype="multipart/form-data">
     <table class="all" style="width:70%; margin:auto;">
         <tr>
             <td class="tt">網站標題圖片：</td>
@@ -12,7 +12,7 @@
         </tr>
     </table>
     <div class="cent">
-    <input type="submit" value="新增">
-    <input type="reset" value="重置">
+        <input type="submit" value="新增">
+        <input type="reset" value="重置">
     </div>
 </form>

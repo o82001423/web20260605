@@ -1,5 +1,8 @@
 <?php
 
+session_start();
+
+
 class DB{
     protected $dsn="mysql:host=localhost;charset=utf8;dbname=db15";
     protected $pdo;
@@ -130,4 +133,11 @@ $Admin=new DB('admin');
 $Menu=new DB('menu');
 $Total=new DB('total');
 $Bottom=new DB('bottom');
+
+if(!isset($_SESSION['visit'])){
+    $_SESSION['visit']=1;
+    $visit=$Total->find(1);
+    $visit['total']++;
+    $Total->save($visit);
+}
 ?>

@@ -1,40 +1,17 @@
 <?php
 include_once "./api/db.php";
-// 建立 row 資料表的 DB 物件
-$row = new DB('row');
-
+// 💡 注意：原本這裡宣告的 $row = new DB('row') 與下方的 foreach($rows as $row) 變數衝突，且檢定中多使用動態變數 ${ucfirst($do)}，此處可不重複宣告。
 ?>
 
-<div class="di"
-    style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
-    <!--正中央-->
-    <table width="100%">
-        <tbody>
-            <tr>
-                <td style="width:70%;
-                font-weight:800;
-                border:#333 1px solid;
-                border-radius:3px;" class="cent">
-                    <a href="?do=admin" style="color:#000; text-decoration:none;">
-                        後台管理區
-                    </a>
-                </td>
-                <td>
-                    <button onclick="document.cookie='user='; location.replace('index.php')"
-                        style="width:99%; margin-right:2px; height:50px;">
-                        管理登出
-                    </button>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-    <div style="width:99%;
-                height:87%;
-                margin:auto;
-                overflow:auto;
-                border:#666 1px solid;">
+<div class="di" style="height:540px; border:#999 1px solid; width:76.5%; margin:2px 0px 0px 0px; float:left; position:relative; left:20px;">
+<?php include"back_header.php"; ?>
+<table width="100%">
+</table>
+
+    <div style="width:99%; height:87%; margin:auto; overflow:auto; border:#666 1px solid;">
         <p class="t cent botli">網站標題管理</p>
-        <form method="post" action="/api/edit.php?table=<?= $do ?>">
+        
+        <form method="post" action="./api/edit.php?table=<?= $do ?>">
             <table width="100%">
                 <tbody>
                     <tr class="yel">
@@ -44,47 +21,40 @@ $row = new DB('row');
                         <td width="7%">刪除</td>
                         <td></td>
                     </tr>
-            <?php 
-            $db=${ucfirst($do)};
-            $rows=$db->all();
-            foreach($rows as $row):
-            ?>
 
+                    <?php 
+                    // 動態取得對應的資料庫物件 (例如 $Title)
+                    $db = ${ucfirst($do)};
+                    $rows = $db->all();
+                    foreach ($rows as $row):
+                    ?>
                     <tr>
                         <td width="45%">
-                            <img src="./upload/<?= $row['img']; ?>" style="width:300px;height:30px">
+                            <img src="./upload/<?= $row['img']; ?>" style="width:300px; height:30px">
                         </td>
                         <td width="23%">
                             <input type="text" name="text[]" value="<?= $row['text']; ?>">
                         </td>
                         <td width="7%">
-                            <input type="radio" name="sh" value="<?= $row['id']; ?>"
-                                <?= ($row['sh']==1)?'checked':''; ?>>
+                            <input type="radio" name="sh" value="<?= $row['id']; ?>" <?= ($row['sh'] == 1) ? 'checked' : ''; ?>>
                         </td>
                         <td width="7%">
                             <input type="checkbox" name="del[]" value="<?= $row['id']; ?>">
                         </td>
                         <td>
-
-                            <input type="button" value="更新圖片"
-                                onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?= $row['id'];?>')">
+                            <input type="button" value="更新圖片" onclick="op('#cover','#cvr','./include/update_<?= $do; ?>.php?id=<?= $do; ?>&id=<?= $row['id']; ?>')">
                         </td>
                         <input type="hidden" name="id[]" value="<?= $row['id']; ?>">
                     </tr>
-                    <?php 
-                    // 💡 在表格列結束後，用 endforeach 關閉迴圈
-                        endforeach; 
-                        ?>
+                    <?php endforeach; ?>
                 </tbody>
-
             </table>
+
             <table style="margin-top:40px; width:70%;">
                 <tbody>
                     <tr>
                         <td width="200px">
-                            <input type="button"
-                                onclick="op('#cover','#cvr','include/update_<?= $do; ?>.php?id=<?=  $row['id'] ?>')"
-                                value="新增網站標題圖片">
+                            <input type="button" onclick="op('#cover','#cvr','./include/<?= $do; ?>.php?table=<?= $do; ?>')" value="新增網站標題圖片">
                         </td>
                         <td class="cent">
                             <input type="hidden" name="table" value="<?= $do; ?>">
@@ -94,7 +64,6 @@ $row = new DB('row');
                     </tr>
                 </tbody>
             </table>
-
         </form>
     </div>
 </div>
